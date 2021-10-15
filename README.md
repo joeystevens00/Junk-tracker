@@ -35,7 +35,7 @@ You have been hired to build an inventory management system for your local junky
     - Wheels: 0-4, default: 4
     - Doors: 0-4, default: 4
       - For each door: (**Tip**: Make sure everything else is working before addressing this)
-        - Sliding: boolean, default: false 
+        - Sliding: boolean, default: false
     - Engine status: works, fixable, junk, default: works
 - Motorcycle
     - Nickname: string
@@ -48,9 +48,9 @@ You have been hired to build an inventory management system for your local junky
 
 **Please don't spend more than two (2) hours on this project!**
 
-The goal is not to add every bell, whistle, feature and optimization that you can think of. The goal is to both see an example of working code that you write and see how you do implementing realistic (albeit contrived...) features. 
+The goal is not to add every bell, whistle, feature and optimization that you can think of. The goal is to both see an example of working code that you write and see how you do implementing realistic (albeit contrived...) features.
 
-You will be judged on how accurately you complete the above tasks and the quality of the code you write. 
+You will be judged on how accurately you complete the above tasks and the quality of the code you write.
 
 The backend has some routes stubbed out and the frontend has been initialized via Angular CLI. You are free to make any and all changes you'd like to complete the assignment.
 
@@ -66,3 +66,28 @@ When you are finished, push all changes to the repo on GitHub and email us that 
 - Make your first priority getting everything to work! Save the bonus points for after you get things working all the way through.
 - Do not worry about server-side rendering of any JavaScript React components
 - Add any additional Python pckages, npm modules or other tools you'd like
+
+
+
+
+```
+$ bash bootstrap.sh
+* Serving Flask app './src/main.py' (lazy loading)
+* Environment: production
+  WARNING: This is a development server. Do not use it in a production deployment.
+  Use a production WSGI server instead.
+* Debug mode: off
+* Running on all addresses.
+  WARNING: This is a development server. Do not use it in a production deployment.
+* Running on http://192.168.16.85:5000/ (Press CTRL+C to quit)
+```
+```
+$ curl -XPOST -H 'Content-Type: application/json' -d '{"type": "Sedan", "nickname": "sedan01", "mileage": 100231, "engine_status": "junk"}' localhost:5000/vehicles
+{"doors":4,"engine_status":"junk","id":1,"mileage":100231,"nickname":"sedan01","registration_id":"85eb26a1-cec8-48ec-9d63-caf8d83cad91","wheels":4}
+
+```
+
+```
+$ curl localhost:5000/vehicles
+[{"doors":4,"engine_status":"junk","id":1,"mileage":100231,"nickname":"sedan01","registration_id":"d7a47c56-0af3-428c-846b-9dc655dc9d4c","wheels":4}]
+```

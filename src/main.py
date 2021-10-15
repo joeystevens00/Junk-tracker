@@ -15,14 +15,15 @@ database = Database()
 @app.route('/vehicles')
 def get_vehicles():
   # TODO
-  return jsonify({})
+  return jsonify(database.list())
 
 @app.route('/vehicles', methods=['POST'])
 def create_vehicle():
   new_vehicle = request.get_json()
   # Look up the model class and creatae a new instance of the model to validate the schema of the request
-  validated = vehicle.VEHCILE_TYPE_MAP.get(new_vehicle.get('type'))(new_vehicle)
-  dbo = database.create(dict(validated))
+  vehicle_class = vehicle.VEHCILE_TYPE_MAP.get(new_vehicle.get('type'))
+  validated = vehicle_class(**new_vehicle)
+  dbo = database.create(validated.to_dict())
   registration_id = register_vehicle(dbo)
   database.update(dbo['id'], {'registration_id': registration_id})
   return jsonify(dbo)
@@ -32,8 +33,8 @@ def get_vehicle(id):
   # TODO
   try:
       dbo = database.find(id)
-      return jsonify()
-  except:
+      return jsonify(dbo)
+  except KeyError:
       abort(404)
 
 

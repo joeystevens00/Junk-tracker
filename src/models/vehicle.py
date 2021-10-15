@@ -22,6 +22,11 @@ class Vehicle(BaseModel):
         if self.mileage > 100_000:
             return "high"
 
+    def to_dict(self):
+        d = dict(self)
+        d['engine_status'] = d['engine_status'].value
+        return d
+
 
 class Car(Vehicle):
     doors: int = 4
